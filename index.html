@@ -10,38 +10,94 @@
     <div class="cal-box">
         <div class="box">
 
-            <form name="form1" action="">
+            <div class="top-bar">
+                <button type="button" class="mode-btn" id="degBtn" onclick="toggleAngle()">DEG</button>
+                <button type="button" class="mode-btn" id="invBtn" onclick="toggleInv()">INV</button>
+                <button type="button" class="mode-btn tetris-toggle" onclick="showTetris()">TETRIS</button>
+            </div>
 
-                <input class="inputValue" type="text" name="textview">
+            <!-- CALCULATOR VIEW -->
+            <div id="calcView">
+                <form name="form1" action="" onsubmit="return false;">
+                    <input class="inputValue" type="text" name="textview">
+                </form>
 
-            </form>
+                <section>
+                    <div class="sci-container">
+                        <button class="sci" id="sinBtn" onclick="func('sin')">sin</button>
+                        <button class="sci" id="cosBtn" onclick="func('cos')">cos</button>
+                        <button class="sci" id="tanBtn" onclick="func('tan')">tan</button>
+                        <button class="sci" id="logBtn" onclick="func('log')">log</button>
+                        <button class="sci" id="lnBtn" onclick="func('ln')">ln</button>
 
-            <section>
-                <div class="container">
-                    <button value="C" onclick="form1.textview.value =''">C</button>
-                    <button value="B" onclick="backspace()">B</button>
-                    <button value="/" onclick="insert('/')">/</button>
-                    <button value="*" onclick="insert('*')">X</button>
+                        <button class="sci" id="sqrtBtn" onclick="func('sqrt')">√</button>
+                        <button class="sci" id="powBtn" onclick="insert('^')">xʸ</button>
+                        <button class="sci" onclick="insert('(')">(</button>
+                        <button class="sci" onclick="insert(')')">)</button>
+                        <button class="sci" onclick="insert('!')">x!</button>
 
-                    <button value="7" onclick="insert(7)">7</button>
-                    <button value="8" onclick="insert(8)">8</button>
-                    <button value="9" onclick="insert(9)">9</button>
-                    <button value="-" onclick="insert('-')">-</button>
+                        <button class="sci" onclick="insert('π')">π</button>
+                        <button class="sci" onclick="insert('e')">e</button>
+                        <button class="sci" onclick="insert('%')">%</button>
+                        <button class="sci" onclick="func('abs')">|x|</button>
+                        <button class="sci" onclick="negate()">±</button>
+                    </div>
 
-                    <button value="4" onclick="insert(4)">4</button>
-                    <button value="5" onclick="insert(5)">5</button>
-                    <button value="6" onclick="insert(6)">6</button>
-                    <button value="+" onclick="insert('+')">+</button>
+                    <div class="container">
+                        <button value="C" onclick="form1.textview.value =''">C</button>
+                        <button value="B" onclick="backspace()">B</button>
+                        <button value="/" onclick="insert('/')">/</button>
+                        <button value="*" onclick="insert('*')">X</button>
 
-                    <button value="1" onclick="insert(1)">1</button>
-                    <button value="2" onclick="insert(2)">2</button>
-                    <button value="3" onclick="insert(3)">3</button>
+                        <button value="7" onclick="insert(7)">7</button>
+                        <button value="8" onclick="insert(8)">8</button>
+                        <button value="9" onclick="insert(9)">9</button>
+                        <button value="-" onclick="insert('-')">-</button>
 
-                    <button value="=" class="btnequal" onclick="equal()">=</button>
-                    <button value="0" class="btnzero" onclick="insert(0)">0</button>
-                    <button value="." onclick="insert('.')">.</button>
+                        <button value="4" onclick="insert(4)">4</button>
+                        <button value="5" onclick="insert(5)">5</button>
+                        <button value="6" onclick="insert(6)">6</button>
+                        <button value="+" onclick="insert('+')">+</button>
+
+                        <button value="1" onclick="insert(1)">1</button>
+                        <button value="2" onclick="insert(2)">2</button>
+                        <button value="3" onclick="insert(3)">3</button>
+
+                        <button value="=" class="btnequal" onclick="equal()">=</button>
+                        <button value="0" class="btnzero" onclick="insert(0)">0</button>
+                        <button value="." onclick="insert('.')">.</button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TETRIS VIEW -->
+            <div id="tetrisView" class="hidden">
+                <div class="tetris-info">
+                    <div>SCORE <span id="tScore">0</span></div>
+                    <div>LINES <span id="tLines">0</span></div>
+                    <div>LEVEL <span id="tLevel">1</span></div>
                 </div>
-            </section>
+
+                <div class="tetris-main">
+                    <canvas id="tetrisCanvas" width="200" height="400"></canvas>
+                    <div class="tetris-side">
+                        <div class="next-label">NEXT</div>
+                        <canvas id="nextCanvas" width="80" height="80"></canvas>
+                        <button type="button" class="t-btn" onclick="startTetris()">START</button>
+                        <button type="button" class="t-btn" onclick="pauseTetris()">PAUSE</button>
+                        <button type="button" class="t-btn back" onclick="showCalc()">CALC</button>
+                    </div>
+                </div>
+
+                <div class="tetris-controls">
+                    <button type="button" class="t-ctrl" onclick="tMove(-1)">◀</button>
+                    <button type="button" class="t-ctrl" onclick="tRotate()">⟳</button>
+                    <button type="button" class="t-ctrl" onclick="tMove(1)">▶</button>
+                    <button type="button" class="t-ctrl" onclick="tSoftDrop()">▼</button>
+                    <button type="button" class="t-ctrl wide" onclick="tHardDrop()">DROP</button>
+                </div>
+                <div class="tetris-hint">Arrow keys: move / rotate / soft drop &nbsp;•&nbsp; Space: hard drop &nbsp;•&nbsp; P: pause</div>
+            </div>
 
         </div>
     </div>
